@@ -39,7 +39,7 @@ async def shout(ctx, text: str, filter_override: bool=False):
     try:
         group = await client.get_group(config.groupId)
         if group.shout == None:
-            await group.update_shout(text)
+            await group.update_shout(text) # This is outdated, but used if a shout is not present as group.shout() returns an error. There might be a better way of doing this, but this works consistently, at least according to my testing.
         else:
             await group.shout(text)
     except:
