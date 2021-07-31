@@ -1,15 +1,19 @@
-from ro_py import Client
+from ro_py import Client # Roblox API library
+
+# Discord API Wrapper
 import discord
 from discord.ext import commands
-from discord_slash import SlashCommand # Importing the newly installed library.
+
+# Discord.py Extention for Slash Commands
+from discord_slash import SlashCommand
 from discord_slash.utils.manage_commands import create_option
 
-from purgo_malum import client as filterClient
+from purgo_malum import client as filterClient # Profanity filter library
 
 import config
 client = Client(config.robloxAccountCookie)
 
-bot = commands.Bot(command_prefix='?', help_command=None)
+bot = commands.Bot(command_prefix=config.discordBotPrefix, help_command=None)
 slash = SlashCommand(bot, sync_commands=True)
 
 @slash.slash(name="shout",
@@ -26,9 +30,10 @@ slash = SlashCommand(bot, sync_commands=True)
                 description="If you are an admin you may use this to override the profanity filter.",
                 option_type=5,
                 required=False
-                )], guild_ids=[534404907315494972])
+                )], guild_ids=config.guildIds)
+@commands.has_permissions(manage_guild=True) # This determines what permission(s) a user requires to use the command, more info: https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.has_permissions & https://discordpy.readthedocs.io/en/stable/api.html#discord.Permissions
 async def shout(ctx, text: str, filter_override: bool=False):
-    if filterClient.contains_profanity(text) == True and not (filter_override == True and ctx.author.guild_permissions.administrator):
+    if filterClient.contains_profanity(text) == True and not (filter_override == True and ctx.author.guild_permissions.administrator) and config.profanityFilterOn == True:
         await ctx.send(content='Shout failed, profanity detected.', hidden=True)
         return
     try:

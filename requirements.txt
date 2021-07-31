@@ -1,0 +1,5 @@
+discord.py==1.7.3
+PurgoMalum==1.0.3
+ro_py==1.2.0.5
+discord_py_slash_command==2.3.2
+discord==1.7.3
