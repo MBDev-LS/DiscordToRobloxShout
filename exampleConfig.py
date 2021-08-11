@@ -1,6 +1,6 @@
 # Security Tokens
 developmentDiscordToken='Discord Bot Token' # Your discord bot's token, can be found/created by visiting https://discord.com/developers/applications
-robloxAccountCookie='Roblox Bot Account Cookie' # The cookie of the account you are using to post the shout, this must have shout permitions in the group specified in the groupId setting
+robloxAccountCookie='Roblox Bot Account Cookie' # The cookie of the account you are using to post the shout, this account must have shout permissions in the group specified in the groupId setting
 
 # Settings
 groupId=10000000 # The id of the group you would like to post a shout to
